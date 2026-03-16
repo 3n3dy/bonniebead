@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { AdminProvider, useAdmin } from './admin/AdminContext'
 import AdminLogin from './admin/AdminLogin'
 import AdminPanel from './admin/AdminPanel'
+import { CartProvider } from './cart/CartContext'
+import CartDrawer from './cart/CartDrawer'
+import { UserProvider } from './user/UserContext'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import CatalogGrid from './components/CatalogGrid'
@@ -18,20 +21,25 @@ function PublicSite() {
   const activeCategory = catalog.find(c => c.id === activeCatId)
 
   return (
-    <div className="min-h-screen flex flex-col bg-cream-100">
-      <Header onHome={() => setActiveCatId(null)} />
-      <main className="flex-1">
-        {activeCategory ? (
-          <CategoryPage category={activeCategory} onBack={() => setActiveCatId(null)} />
-        ) : (
-          <>
-            <Hero />
-            <CatalogGrid categories={catalog} onSelect={setActiveCatId} />
-          </>
-        )}
-      </main>
-      <Footer />
-    </div>
+    <UserProvider>
+      <CartProvider>
+        <div className="min-h-screen flex flex-col bg-cream-100">
+          <Header onHome={() => setActiveCatId(null)} />
+          <main className="flex-1">
+            {activeCategory ? (
+              <CategoryPage category={activeCategory} onBack={() => setActiveCatId(null)} />
+            ) : (
+              <>
+                <Hero />
+                <CatalogGrid categories={catalog} onSelect={setActiveCatId} />
+              </>
+            )}
+          </main>
+          <Footer />
+          <CartDrawer />
+        </div>
+      </CartProvider>
+    </UserProvider>
   )
 }
 

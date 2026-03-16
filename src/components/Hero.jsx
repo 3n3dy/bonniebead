@@ -15,7 +15,7 @@ export default function Hero() {
         {/* Side note */}
         <div className="col-span-12 md:col-span-4 md:text-right pb-2">
           <p className="font-sans text-sm text-stone-500 leading-relaxed max-w-xs md:ml-auto">
-            Ювелірні вироби ручної роботи. Кожна прикраса — унікальна.
+            Ювелірні вироби ручної роботи з дорогоцінних металів та каменів. Кожна прикраса — унікальна.
           </p>
         </div>
       </div>
@@ -24,10 +24,9 @@ export default function Hero() {
       <div className="rule mt-12 mb-8" />
       <div className="flex flex-wrap gap-8 md:gap-16">
         {[
-          ['9', 'Колекцій'],
-          ['100+', 'Найменувань'],
-          ['585 / 925', 'Проби металу'],
-          ['Київ', 'Виготовлення'],
+          ['9', 'Категорій'],
+          ['400+', 'Виконаних індивідуальних замовлень'],
+          ['AISI 316L/18К/24К', 'Проби металу'],
         ].map(([val, label]) => (
           <div key={label}>
             <p className="font-display text-xl font-medium text-stone-950">{val}</p>

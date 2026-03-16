@@ -1,53 +1,76 @@
 const CONTACTS = {
-  phone: '+38 (095) 057-16-49',
   email: 'bonniebead@gmail.com',
-  instagram: '@bonniebead',
-  address: 'Уся Україна',
-  hours: 'Пн–Сб, 10:00–19:00',
+  instagram: 'https://www.instagram.com/bonniebead/',
+  facebook: 'https://www.facebook.com/bonniebeadshop',
+  etsy: 'https://www.etsy.com/shop/hannabonniebead/',
 }
 
 export default function Footer() {
   return (
     <footer className="bg-stone-950 text-cream-200 mt-0">
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 pt-16 pb-10">
+
         {/* Top */}
-        <div className="grid grid-cols-1 text-gray-800 md:grid-cols-3 gap-10 md:gap-16 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-10 md:gap-8 pb-12 items-start">
+
           {/* Brand */}
-          <div>
-            <p className="font-display text-4xl font-medium tracking-widest2 text-cream-100 mb-4">
+          <div className="md:pr-16">
+            <p className="font-display text-4xl font-medium tracking-widest2 text-cream-100 mb-1">
+              HANNA
+            </p>
+            <p className="font-display text-lg tracking-widest2 text-blush mb-6">
               BONNIEBEAD
             </p>
-            <p className="font-sans text-sm text-stone-400 leading-relaxed max-w-xs">
-              Ексклюзивні прикраси з бісеру тадорогоцінних металів. Ручна робота. Уся Україна.
+            <div className="w-8 h-px bg-blush mb-6" />
+            <p className="font-sans text-sm text-stone-400 leading-relaxed max-w-md">
+              Ексклюзивні прикраси з бісеру та мінералів ручної роботи.
+              Індивідуальні замовлення | прикраси з наявності | реставрація ваших старих прикрас.
+              Можлива співпраця з бізнесом (салони краси, студії, ГО та інші).
+              Відправка по всій Україні.
             </p>
           </div>
 
-          {/* Contacts */}
-          <div>
-            <p className="text-xs tracking-widest2 uppercase text-stone-500 mb-5 font-sans">Контакти</p>
-            <ul className="space-y-3 text-sm text-stone-300">
-              <li>{CONTACTS.phone}</li>
-              <li>{CONTACTS.email}</li>
-              <li>{CONTACTS.address}</li>
-              <li className="text-stone-500 text-xs">{CONTACTS.hours}</li>
-            </ul>
-          </div>
-
-          {/* Social */}
-          <div>
-            <p className="text-xs tracking-widest2 uppercase text-stone-500 mb-5 font-sans">Соціальні мережі</p>
-            <p className="text-sm text-stone-300">{CONTACTS.instagram}</p>
-            <div className="rule w-12 mt-6 mb-2" style={{ background: '#C4A882' }} />
-            <p className="font-sans text-xs text-stone-600 leading-relaxed">
-              Слідкуйте за новими надходженнями та закулісним виготовленням.
+          {/* Зв'язок */}
+          <div className="md:border-l md:border-stone-800 md:pl-10">
+            <p className="text-xs tracking-widest2 uppercase text-stone-500 mb-6 font-sans">
+              Зв&apos;язок зі мною
             </p>
+            <div className="space-y-6 text-sm text-stone-300">
+
+              <div>
+                <span className="block text-xs uppercase tracking-widest2 text-stone-600 mb-1.5">Email</span>
+                <a href={`mailto:${CONTACTS.email}`} className="hover:text-cream-100 underline-offset-4 hover:underline transition-colors break-all">
+                  {CONTACTS.email}
+                </a>
+              </div>
+
+              <div>
+                <span className="block text-xs uppercase tracking-widest2 text-stone-600 mb-2">Соціальні мережі</span>
+                <ul className="space-y-2">
+                  {[
+                    { label: 'Instagram', href: CONTACTS.instagram },
+                    { label: 'Facebook',  href: CONTACTS.facebook  },
+                    { label: 'Etsy',      href: CONTACTS.etsy      },
+                  ].map(({ label, href }) => (
+                    <li key={label}>
+                      <a href={href} target="_blank" rel="noreferrer"
+                        className="flex items-center gap-2 text-stone-300 hover:text-cream-100 transition-colors group">
+                        <span className="w-3 h-px bg-stone-700 group-hover:bg-blush group-hover:w-5 transition-all duration-300" />
+                        {label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
           </div>
         </div>
 
-        {/* Bottom rule + copyright */}
+        {/* Bottom */}
         <div className="border-t border-stone-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="index-label text-stone-600">© 2026 BONNIEBEAD · Всі права захищено</p>
-          <p className="font-display italic text-stone-400 text-sm">Зроблено з увагою до деталей</p>
+          <p className="font-display italic text-stone-700 text-sm">Зроблено з увагою до деталей</p>
         </div>
       </div>
     </footer>
