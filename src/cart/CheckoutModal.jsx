@@ -4,9 +4,9 @@ import { useCart } from './CartContext'
 import { useUser } from '../user/UserContext'
 
 // ─── EmailJS — замініть на свої ключі ──────────────────────────────────────
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'
+const EMAILJS_SERVICE_ID  = 'service_s0iormm'
+const EMAILJS_TEMPLATE_ID = 'template_oyp97fl'
+const EMAILJS_PUBLIC_KEY  = 'uLfQX6hFuI8kCtoZw'
 // ──────────────────────────────────────────────────────────────────────────
 
 async function sendEmail(params) {
