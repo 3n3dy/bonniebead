@@ -4,7 +4,7 @@ import { CATEGORIES } from '../data/catalog'
 const AdminContext = createContext(null)
 
 const STORAGE_KEY = 'maison_catalog_v1'
-const ADMIN_PASSWORD = 'maison2025' // ← змінити на свій пароль
+const ADMIN_PASSWORD = 'passpass2026'
 
 function loadCatalog() {
   try {

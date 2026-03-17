@@ -38,7 +38,7 @@ export default function AdminPanel() {
             onClick={() => setActiveCatId(null)}
             className="font-display text-xl tracking-widest2 text-cream-100 hover:opacity-70 transition-opacity"
           >
-            MAISON
+            BONNIEBEAD
           </button>
           <span className="text-stone-600 text-xs">·</span>
           <span className="text-xs tracking-widest uppercase text-stone-500">Адмін-панель</span>

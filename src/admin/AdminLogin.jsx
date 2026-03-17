@@ -19,7 +19,7 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-stone-950 flex items-center justify-center px-6">
       <div className="w-full max-w-xs">
         <p className="font-display text-4xl text-cream-100 tracking-widest2 text-center mb-2">
-          MAISON
+          BONNIEBEAD
         </p>
         <p className="text-center text-xs tracking-widest uppercase text-stone-500 mb-10">
           Адмін-панель

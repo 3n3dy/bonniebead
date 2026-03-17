@@ -7,7 +7,7 @@ export default function CatalogGrid({ categories, onSelect }) {
           <div className="rule-blush w-8" />
           <p className="text-xs tracking-widest2 uppercase font-sans text-stone-500">Каталог</p>
         </div>
-        <p className="index-label">{categories.length} категорій</p>
+        
       </div>
 
       {/* Grid */}

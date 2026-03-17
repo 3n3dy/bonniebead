@@ -71,7 +71,7 @@ export default function Header({ onHome }) {
           </nav>
 
           {/* Center */}
-          <button onClick={() => { onHome(); window.scrollTo({ top: 0, behavior: 'smooth' }) }} className="absolute left-1/2 -translate-x-1/2 font-display text-2xl tracking-widest2 font-medium text-stone-950 hover:opacity-70 transition-opacity">
+          <button onClick={() => { onHome(); window.scrollTo({ top: 0, behavior: 'smooth' }) }} className="absolute left-1/2 -translate-x-1/2 font-display text-lg tracking-wider md:text-2xl md:tracking-widest2 font-medium text-stone-950 hover:opacity-70 transition-opacity">
             BONNIEBEAD
           </button>
 
