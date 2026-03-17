@@ -12,7 +12,7 @@ export function Field({ label, value, onChange, placeholder, type = 'text', mult
   )
 }
 
-// Кнопка — основна
+// Кнопка
 export function Btn({ children, onClick, type = 'button', variant = 'primary', className = '', disabled = false }) {
   const base = 'text-xs tracking-widest uppercase font-medium px-5 py-2.5 transition-colors disabled:opacity-40 disabled:cursor-not-allowed'
   const variants = {
@@ -28,19 +28,45 @@ export function Btn({ children, onClick, type = 'button', variant = 'primary', c
 }
 
 // Модальне вікно
+// Використовуємо onMouseDown замість onClick на оверлеї —
+// це виключає спрацювання після закриття файлового діалогу
 export function Modal({ title, onClose, children }) {
+  const handleOverlayMouseDown = (e) => {
+    if (e.target === e.currentTarget) {
+      // Чекаємо mouseup перед закриттям, щоб не зловити кліки з файлового діалогу
+      const handleMouseUp = (upEvent) => {
+        if (upEvent.target === e.currentTarget) onClose()
+        document.removeEventListener('mouseup', handleMouseUp)
+      }
+      document.addEventListener('mouseup', handleMouseUp)
+    }
+  }
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       style={{ background: 'rgba(10,10,8,0.85)', backdropFilter: 'blur(6px)' }}
-      onClick={(e) => e.target === e.currentTarget && onClose()}
+      onMouseDown={handleOverlayMouseDown}
     >
-      <div className="w-full max-w-md bg-stone-950 border border-stone-800 shadow-2xl">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-stone-800">
+      {/* max-h + overflow-y-auto — щоб контент скролився і кнопки завжди були видні */}
+      <div
+        className="w-full max-w-md bg-stone-950 border border-stone-800 shadow-2xl flex flex-col"
+        style={{ maxHeight: '90vh' }}
+        onMouseDown={e => e.stopPropagation()}
+      >
+        {/* Заголовок — фіксований */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-stone-800 flex-shrink-0">
           <p className="text-sm tracking-widest uppercase text-cream-200">{title}</p>
-          <button onClick={onClose} className="text-stone-500 hover:text-cream-100 transition-colors text-lg leading-none">×</button>
+          <button
+            onClick={onClose}
+            className="text-stone-500 hover:text-cream-100 transition-colors text-xl leading-none w-7 h-7 flex items-center justify-center"
+          >
+            ✕
+          </button>
         </div>
-        <div className="px-6 py-5 space-y-4">
+
+        {/* Контент — скролиться */}
+        <div className="px-6 py-5 space-y-4 overflow-y-auto flex-1">
           {children}
         </div>
       </div>
