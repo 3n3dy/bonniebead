@@ -66,7 +66,7 @@ export default function Header({ onHome }) {
 
           {/* Desktop — left */}
           <nav className="hidden md:flex items-center gap-8">
-            <a onClick={() => { onHome(); window.scrollTo({ top: 0, behavior: 'smooth' }) }} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">Каталог</a>
+           <a onClick={() => { onHome(); setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 50) }} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">Каталог</a>
             <a onClick={() => setShowAbout(true)} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">Про мене</a>
           </nav>
 
