@@ -127,7 +127,7 @@ export default function ProductModal({ product, catName, onClose }) {
             {product.description && (
               <div className="mb-6 flex-1">
                 <p className="text-xs tracking-widest uppercase text-stone-400 mb-2">Опис</p>
-                <p className="text-sm text-stone-600 leading-relaxed">{product.description}</p>
+                <p className="text-sm text-stone-600 leading-relaxed whitespace-pre-wrap">{product.description}</p>
               </div>
             )}
 

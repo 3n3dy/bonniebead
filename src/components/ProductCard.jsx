@@ -88,7 +88,7 @@ export default function ProductCard({ product, catName }) {
           </div>
 
           {product.description && (
-            <p className="font-sans text-xs text-stone-400 leading-relaxed mt-2 line-clamp-2">{product.description}</p>
+            <p className="font-sans text-xs text-stone-400 leading-relaxed mt-2 line-clamp-2 whitespace-pre-wrap">{product.description}</p>
           )}
 
           <button
