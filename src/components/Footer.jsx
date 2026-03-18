@@ -1,5 +1,5 @@
 const CONTACTS = {
-  email: 'bonniebead@gmail.com',
+  email: 'bonniebeadshop@gmail.com',
   instagram: 'https://www.instagram.com/bonniebead/',
   facebook: 'https://www.facebook.com/bonniebeadshop',
   etsy: 'https://www.etsy.com/shop/hannabonniebead/',
