@@ -32,7 +32,10 @@ export default function AboutModal({ onClose }) {
         <div className="px-8 py-8 space-y-5">
 
           <p className="font-sans text-sm text-stone-600 leading-relaxed">
-            Моя історія: Від першого браслета до BonnieBead
+            Моя історія: Від першого браслета до BonnieBead.
+            </p>
+            
+          <p className="font-sans text-sm text-stone-600 leading-relaxed">
             Моя подорож у світ бісеру почалася з випадковості. Я побачила на чиємусь зап'ясті приголомшливий браслет-джгут і в ту ж мить відчула: я МОЖУ зробити такий сама. Мені було 23, я жила в Києві й тоді навіть не здогадувалася, що цей імпульс перетвориться на справу мого натхнення.
           </p>
 
