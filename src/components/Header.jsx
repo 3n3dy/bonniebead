@@ -59,42 +59,47 @@ export default function Header({ onHome }) {
     <>
       <header className="sticky top-0 z-40 bg-cream-100/90 backdrop-blur-sm">
         <div className="rule" />
-        <div className="max-w-screen-xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-12 h-16 flex items-center">
 
-          {/* Desktop — left */}
-          <nav className="hidden md:flex items-center gap-8">
-            <a onClick={scrollToCatalog} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
-              {t('nav.catalog')}
-            </a>
-            <a onClick={() => setShowAbout(true)} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
-              {t('nav.about')}
-            </a>
-          </nav>
+          {/* Left — desktop nav / mobile порожньо */}
+          <div className="flex-1">
+            <nav className="hidden md:flex items-center gap-8">
+              <a onClick={scrollToCatalog} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
+                {t('nav.catalog')}
+              </a>
+              <a onClick={() => setShowAbout(true)} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
+                {t('nav.about')}
+              </a>
+            </nav>
+          </div>
 
-          {/* Center */}
-          <button onClick={onHome} className="absolute left-1/2 -translate-x-1/2 font-display text-lg tracking-wider md:text-2xl md:tracking-widest2 font-medium text-stone-950 hover:opacity-70 transition-opacity">
+          {/* Center — wordmark завжди по центру */}
+          <button onClick={onHome} className="font-display text-xl tracking-widest2 md:text-2xl font-medium text-stone-950 hover:opacity-70 transition-opacity">
             BONNIEBEAD
           </button>
 
-          {/* Desktop — right */}
-          <div className="hidden md:flex items-center gap-4">
-            <LangSwitcher />
-            <a onClick={scrollToFooter} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
-              {t('nav.contact')}
-            </a>
-            <UserIcon />
-            <CartIcon />
-          </div>
+          {/* Right — desktop + mobile */}
+          <div className="flex-1 flex items-center justify-end gap-3 md:gap-4">
+            {/* Desktop */}
+            <div className="hidden md:flex items-center gap-4">
+              <LangSwitcher />
+              <a onClick={scrollToFooter} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
+                {t('nav.contact')}
+              </a>
+              <UserIcon />
+              <CartIcon />
+            </div>
 
-          {/* Mobile — right */}
-          <div className="md:hidden flex items-center gap-3 ml-auto">
-            <LangSwitcher mobile />
-            <UserIcon />
-            <CartIcon />
-            <button onClick={() => setMenuOpen(true)} className="flex flex-col gap-1.5 p-1" aria-label="Меню">
-              <span className="w-5 h-px bg-stone-950 block" />
-              <span className="w-4 h-px bg-stone-950 block" />
-            </button>
+            {/* Mobile */}
+            <div className="md:hidden flex items-center gap-3">
+              <LangSwitcher mobile />
+              <UserIcon />
+              <CartIcon />
+              <button onClick={() => setMenuOpen(true)} className="flex flex-col gap-1.5 p-1" aria-label="Меню">
+                <span className="w-5 h-px bg-stone-950 block" />
+                <span className="w-4 h-px bg-stone-950 block" />
+              </button>
+            </div>
           </div>
         </div>
         <div className="rule" />
