@@ -57,12 +57,13 @@ function ImageSlot({ index, value, onChange, isMain }) {
 }
 
 export default function ProductForm({ initial = {}, onSave, onClose }) {
-  const [name, setName]                   = useState(initial.name || '')
-  const [nameEN, setNameEN]               = useState(initial.nameEN || '')
-  const [price, setPrice]                 = useState(initial.price || '')
-  const [material, setMaterial]           = useState(initial.material || '')
-  const [description, setDescription]     = useState(initial.description || '')
-  const [descriptionEN, setDescriptionEN] = useState(initial.descriptionEN || '')
+  const [name, setName]                       = useState(initial.name || '')
+  const [nameEN, setNameEN]                   = useState(initial.nameEN || '')
+  const [price, setPrice]                     = useState(initial.price || '')
+  const [material, setMaterial]               = useState(initial.material || '')
+  const [description, setDescription]         = useState(initial.description || '')
+  const [descriptionEN, setDescriptionEN]     = useState(initial.descriptionEN || '')
+  const [seoDescription, setSeoDescription]   = useState(initial.seoDescription || '')
   const [urls, setUrls] = useState(() => {
     if (initial.images?.length) return [...initial.images, '', ''].slice(0, 3)
     if (initial.image) return [initial.image, '', '']
@@ -82,6 +83,7 @@ export default function ProductForm({ initial = {}, onSave, onClose }) {
       material: material.trim(),
       description: description.trim(),
       descriptionEN: descriptionEN.trim(),
+      seoDescription: seoDescription.trim(),
       images,
       image: images[0] || '',
     })
@@ -90,6 +92,7 @@ export default function ProductForm({ initial = {}, onSave, onClose }) {
 
   return (
     <Modal title={initial.id ? 'Редагувати товар' : 'Новий товар'} onClose={onClose}>
+
       <div className="grid grid-cols-2 gap-3">
         <Field label="Назва (УКР) *" value={name} onChange={setName} placeholder="Браслет з берилом" />
         <Field label="Name (EN)" value={nameEN} onChange={setNameEN} placeholder="Bracelet with Beryl" />
@@ -103,6 +106,34 @@ export default function ProductForm({ initial = {}, onSave, onClose }) {
       <Field label="Опис (УКР)" value={description} onChange={setDescription} multiline placeholder="Короткий опис..." />
       <Field label="Description (EN)" value={descriptionEN} onChange={setDescriptionEN} multiline placeholder="Short description..." />
 
+      {/* SEO секція */}
+      <div className="space-y-2 pt-1">
+        <div className="flex items-center gap-3">
+          <div className="h-px flex-1 bg-stone-800" />
+          <span className="text-xs tracking-widest uppercase text-stone-600">SEO</span>
+          <div className="h-px flex-1 bg-stone-800" />
+        </div>
+        <p className="text-xs text-stone-600 leading-relaxed">
+          Не показується на сайті — лише для пошукових систем. Пишіть ключові слова англійською через кому або пробіл.
+        </p>
+        <div>
+          <label className="block text-xs tracking-widest uppercase text-stone-500 mb-1.5">
+            SEO Keywords / Description (EN)
+          </label>
+          <textarea
+            value={seoDescription}
+            onChange={e => setSeoDescription(e.target.value)}
+            placeholder="handmade beaded bracelet minerals ukraine boho jewelry gift for her"
+            rows={2}
+            className="w-full bg-stone-900 border border-stone-700 focus:border-blush text-cream-100 placeholder-stone-600 text-sm px-3 py-2.5 outline-none transition-colors resize-none"
+          />
+          <p className="text-xs text-stone-700 mt-1">
+            {seoDescription.length}/160 символів (рекомендовано до 160)
+          </p>
+        </div>
+      </div>
+
+      {/* Фото */}
       <div className="space-y-3">
         <div className="flex items-center gap-3">
           <div className="h-px flex-1 bg-stone-800" />
