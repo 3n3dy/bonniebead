@@ -49,19 +49,34 @@ export default function UserDrawer({ onClose }) {
             <button onClick={onClose} className="text-stone-500 hover:text-cream-100 transition-colors text-xl w-7 h-7 flex items-center justify-center mt-0.5">✕</button>
           </div>
 
-          {/* Tabs */}
-          <div className="flex gap-4 mt-5">
-            {TABS.map(tabKey => (
-              <button key={tabKey} onClick={() => setTab(tabKey)}
-                className={`text-xs tracking-widest uppercase font-sans pb-2 border-b transition-colors ${
-                  tab === tabKey ? 'text-cream-100 border-blush' : 'text-stone-500 border-transparent hover:text-stone-300'
-                }`}>
-                {tabLabels[tabKey]}
-                {tabKey === 'wishlist' && wishlist.length > 0 && (
-                  <span className="ml-1.5 text-blush">({wishlist.length})</span>
-                )}
-              </button>
-            ))}
+          {/* Tabs + cart icon */}
+          <div className="flex items-end justify-between mt-5">
+            <div className="flex gap-4">
+              {TABS.map(tabKey => (
+                <button key={tabKey} onClick={() => setTab(tabKey)}
+                  className={`text-xs tracking-widest uppercase font-sans pb-2 border-b transition-colors ${
+                    tab === tabKey ? 'text-cream-100 border-blush' : 'text-stone-500 border-transparent hover:text-stone-300'
+                  }`}>
+                  {tabLabels[tabKey]}
+                  {tabKey === 'wishlist' && wishlist.length > 0 && (
+                    <span className="ml-1.5 text-blush">({wishlist.length})</span>
+                  )}
+                </button>
+              ))}
+            </div>
+
+            {/* Іконка кошика */}
+            <button
+              onClick={() => { onClose(); setTimeout(() => openCart(true), 300) }}
+              className="relative pb-2 text-stone-500 hover:text-cream-100 transition-colors"
+              title="Кошик"
+            >
+              <svg width="17" height="17" viewBox="0 0 18 18" fill="none">
+                <path d="M1 1h2.5l1.8 8.5h8.4l1.5-5.5H5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="8" cy="15.5" r="1" fill="currentColor"/>
+                <circle cx="13" cy="15.5" r="1" fill="currentColor"/>
+              </svg>
+            </button>
           </div>
         </div>
 
