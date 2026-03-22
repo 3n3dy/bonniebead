@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useParams, useNavigate, Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { AdminProvider, useAdmin } from './admin/AdminContext'
@@ -11,10 +11,11 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import CatalogGrid from './components/CatalogGrid'
 import CategoryPage from './components/CategoryPage'
+import ProductPage from './components/ProductPage'
 import Footer from './components/Footer'
 
-// ── Утиліти для slug ─────────────────────────────────────────────────────
-export function toSlug(str) {
+// ── Slug утиліта ─────────────────────────────────────────────────────────
+export function toSlug(str = '') {
   return str
     .toLowerCase()
     .replace(/\s+/g, '-')
@@ -23,27 +24,7 @@ export function toSlug(str) {
     .trim()
 }
 
-// ── Сторінка категорії через URL ─────────────────────────────────────────
-function CategoryRoute() {
-  const { categorySlug } = useParams()
-  const navigate = useNavigate()
-  const { catalog } = useAdmin()
-  const { i18n } = useTranslation()
-  const lang = i18n.language
-
-  const category = catalog.find(c => toSlug(c.name) === categorySlug || toSlug(c.nameLatin || '') === categorySlug)
-
-  if (!category) return <Navigate to={lang === 'en' ? '/en' : '/'} replace />
-
-  return (
-    <CategoryPage
-      category={category}
-      onBack={() => navigate(lang === 'en' ? '/en' : '/')}
-    />
-  )
-}
-
-// ── Layout — спільний хедер/футер ────────────────────────────────────────
+// ── Layout ───────────────────────────────────────────────────────────────
 function Layout({ children }) {
   const navigate = useNavigate()
   const { i18n } = useTranslation()
@@ -63,7 +44,7 @@ function Layout({ children }) {
   )
 }
 
-// ── Головна сторінка ─────────────────────────────────────────────────────
+// ── Головна ──────────────────────────────────────────────────────────────
 function HomePage() {
   const { catalog, loading } = useAdmin()
   const navigate = useNavigate()
@@ -94,31 +75,88 @@ function HomePage() {
   )
 }
 
+// ── Сторінка категорії ───────────────────────────────────────────────────
+function CategoryRoute() {
+  const { categorySlug } = useParams()
+  const navigate = useNavigate()
+  const { catalog } = useAdmin()
+  const { i18n } = useTranslation()
+  const lang = i18n.language
+
+  const category = catalog.find(c =>
+    toSlug(c.nameLatin || '') === categorySlug || toSlug(c.name) === categorySlug
+  )
+
+  if (!category) return <Navigate to={lang === 'en' ? '/en' : '/'} replace />
+
+  const handleProductClick = (product) => {
+    const slug = toSlug(product.nameEN || product.name)
+    const catSlug = toSlug(category.nameLatin || category.name)
+    navigate(lang === 'en'
+      ? `/en/catalog/${catSlug}/${slug}`
+      : `/catalog/${catSlug}/${slug}`
+    )
+  }
+
+  return (
+    <CategoryPage
+      category={category}
+      onBack={() => navigate(lang === 'en' ? '/en' : '/')}
+      onProductClick={handleProductClick}
+    />
+  )
+}
+
+// ── Сторінка товару ──────────────────────────────────────────────────────
+function ProductRoute() {
+  const { categorySlug, productSlug } = useParams()
+  const navigate = useNavigate()
+  const { catalog } = useAdmin()
+  const { i18n } = useTranslation()
+  const lang = i18n.language
+
+  const category = catalog.find(c =>
+    toSlug(c.nameLatin || '') === categorySlug || toSlug(c.name) === categorySlug
+  )
+  const product = category?.products.find(p =>
+    toSlug(p.nameEN || p.name) === productSlug || toSlug(p.name) === productSlug
+  )
+
+  if (!category || !product) return <Navigate to={lang === 'en' ? '/en' : '/'} replace />
+
+  const catSlug = toSlug(category.nameLatin || category.name)
+
+  return (
+    <ProductPage
+      product={product}
+      category={category}
+      onBack={() => navigate(lang === 'en' ? `/en/catalog/${catSlug}` : `/catalog/${catSlug}`)}
+    />
+  )
+}
+
 // ── Публічний сайт ───────────────────────────────────────────────────────
 function PublicSite() {
   const { i18n } = useTranslation()
 
-  // Синхронізуємо мову з URL при навігації
   useEffect(() => {
     const path = window.location.pathname
-    const shouldBeEN = path.startsWith('/en')
-    if (shouldBeEN && i18n.language !== 'en') i18n.changeLanguage('en')
-    if (!shouldBeEN && i18n.language !== 'uk') i18n.changeLanguage('uk')
+    if (path.startsWith('/en') && i18n.language !== 'en') i18n.changeLanguage('en')
+    if (!path.startsWith('/en') && i18n.language !== 'uk') i18n.changeLanguage('uk')
   }, [])
 
   return (
     <UserProvider>
       <CartProvider>
         <Routes>
-          {/* Українська версія */}
           <Route path="/" element={<Layout><HomePage /></Layout>} />
           <Route path="/catalog/:categorySlug" element={<Layout><CategoryRoute /></Layout>} />
+          <Route path="/catalog/:categorySlug/:productSlug" element={<Layout><ProductRoute /></Layout>} />
 
-          {/* Англійська версія */}
           <Route path="/en" element={<Layout><HomePage /></Layout>} />
           <Route path="/en/catalog/:categorySlug" element={<Layout><CategoryRoute /></Layout>} />
+          <Route path="/en/catalog/:categorySlug/:productSlug" element={<Layout><ProductRoute /></Layout>} />
 
-          {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </CartProvider>
@@ -132,10 +170,8 @@ function AdminRoute() {
   return isAdmin ? <AdminPanel /> : <AdminLogin />
 }
 
-// ── Root ─────────────────────────────────────────────────────────────────
 export default function App() {
   const isAdmin = window.location.pathname === '/admin' || window.location.search.includes('admin')
-
   return (
     <BrowserRouter>
       <AdminProvider>

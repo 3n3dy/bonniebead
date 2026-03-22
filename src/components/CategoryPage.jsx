@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import ProductCard from './ProductCard'
 
-export default function CategoryPage({ category, onBack }) {
+export default function CategoryPage({ category, onBack, onProductClick }) {
   const { t, i18n } = useTranslation()
   const isEN = i18n.language === 'en'
 
@@ -39,8 +39,12 @@ export default function CategoryPage({ category, onBack }) {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {category.products.map((product, i) => (
-              <div key={product.id} className="group/card" style={{ animationDelay: `${i * 55}ms` }}>
-                <ProductCard product={product} catName={name} />
+              <div key={product.id} style={{ animationDelay: `${i * 55}ms` }}>
+                <ProductCard
+                  product={product}
+                  catName={name}
+                  onOpenProduct={onProductClick ? () => onProductClick(product) : null}
+                />
               </div>
             ))}
           </div>
