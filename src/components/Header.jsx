@@ -1,54 +1,51 @@
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import AboutModal from './AboutModal'
+import LangSwitcher from './LangSwitcher'
 import { useCart } from '../cart/CartContext'
 import { useUser } from '../user/UserContext'
 import AuthModal from '../user/AuthModal'
 import UserDrawer from '../user/UserDrawer'
 
 export default function Header({ onHome }) {
+  const { t } = useTranslation()
   const [showAbout, setShowAbout] = useState(false)
-  const [showAuth, setShowAuth] = useState(false)
-  const [showUser, setShowUser] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [showAuth,  setShowAuth]  = useState(false)
+  const [showUser,  setShowUser]  = useState(false)
+  const [menuOpen,  setMenuOpen]  = useState(false)
 
   const { totalCount, setIsOpen: openCart } = useCart()
-  const { isLoggedIn, wishlist } = useUser()
+  const { isLoggedIn } = useUser()
 
   const scrollToFooter = () => {
     const footer = document.querySelector('footer')
     if (footer) footer.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
-  const closeMenu = () => setMenuOpen(false)
-
-  const handleUserClick = () => {
-    if (isLoggedIn) setShowUser(true)
-    else setShowAuth(true)
+  const scrollToCatalog = () => {
+    onHome()
+    setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 80)
   }
+  const closeMenu = () => setMenuOpen(false)
+  const handleUserClick = () => isLoggedIn ? setShowUser(true) : setShowAuth(true)
 
-  // Іконка профілю
   const UserIcon = () => (
-    <button onClick={handleUserClick} className="relative flex items-center text-stone-500 hover:text-stone-950 transition-colors" title={isLoggedIn ? 'Кабінет' : 'Увійти'}>
+    <button onClick={handleUserClick} className="relative flex items-center text-stone-500 hover:text-stone-950 transition-colors" title={isLoggedIn ? t('nav.cabinet') : t('nav.login')}>
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <circle cx="9" cy="6" r="3" stroke="currentColor" strokeWidth="1.2" />
-        <path d="M2 16c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+        <circle cx="9" cy="6" r="3" stroke="currentColor" strokeWidth="1.2"/>
+        <path d="M2 16c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
       </svg>
       {isLoggedIn && <span className="absolute -top-1 -right-1 w-2 h-2 bg-blush rounded-full" />}
-      {!isLoggedIn && wishlist.length > 0 && (
-        <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-blush text-white text-xs rounded-full flex items-center justify-center leading-none">
-          {wishlist.length}
-        </span>
-      )}
     </button>
   )
 
-  // Іконка кошика
   const CartIcon = () => (
     <button onClick={() => openCart(true)} className="relative flex items-center text-stone-500 hover:text-stone-950 transition-colors">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <path d="M1 1h2.5l1.8 8.5h8.4l1.5-5.5H5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="8" cy="15.5" r="1" fill="currentColor" />
-        <circle cx="13" cy="15.5" r="1" fill="currentColor" />
+        <path d="M1 1h2.5l1.8 8.5h8.4l1.5-5.5H5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="8" cy="15.5" r="1" fill="currentColor"/>
+        <circle cx="13" cy="15.5" r="1" fill="currentColor"/>
       </svg>
       {totalCount > 0 && (
         <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-stone-950 text-cream-100 text-xs rounded-full flex items-center justify-center leading-none">
@@ -66,24 +63,32 @@ export default function Header({ onHome }) {
 
           {/* Desktop — left */}
           <nav className="hidden md:flex items-center gap-8">
-           <a onClick={() => { onHome(); setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 50) }} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">Каталог</a>
-            <a onClick={() => setShowAbout(true)} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">Про мене</a>
+            <a onClick={scrollToCatalog} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
+              {t('nav.catalog')}
+            </a>
+            <a onClick={() => setShowAbout(true)} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
+              {t('nav.about')}
+            </a>
           </nav>
 
           {/* Center */}
-          <button onClick={() => { onHome(); window.scrollTo({ top: 0, behavior: 'smooth' }) }} className="absolute left-1/2 -translate-x-1/2 font-display text-lg tracking-wider md:text-2xl md:tracking-widest2 font-medium text-stone-950 hover:opacity-70 transition-opacity">
+          <button onClick={onHome} className="absolute left-1/2 -translate-x-1/2 font-display text-lg tracking-wider md:text-2xl md:tracking-widest2 font-medium text-stone-950 hover:opacity-70 transition-opacity">
             BONNIEBEAD
           </button>
 
           {/* Desktop — right */}
-          <div className="hidden md:flex items-center gap-5">
-            <a onClick={scrollToFooter} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">Зв&apos;язатись</a>
+          <div className="hidden md:flex items-center gap-4">
+            <LangSwitcher />
+            <a onClick={scrollToFooter} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
+              {t('nav.contact')}
+            </a>
             <UserIcon />
             <CartIcon />
           </div>
 
           {/* Mobile — right */}
-          <div className="md:hidden flex items-center gap-4 ml-auto">
+          <div className="md:hidden flex items-center gap-3 ml-auto">
+            <LangSwitcher mobile />
             <UserIcon />
             <CartIcon />
             <button onClick={() => setMenuOpen(true)} className="flex flex-col gap-1.5 p-1" aria-label="Меню">
@@ -106,15 +111,15 @@ export default function Header({ onHome }) {
             </div>
             <nav className="flex flex-col px-6 py-6 flex-1">
               {[
-                { label: 'Каталог', action: () => { closeMenu(); onHome(); window.scrollTo({ top: 0, behavior: 'smooth' }) } },
-                { label: 'Про мене', action: () => { closeMenu(); setTimeout(() => setShowAbout(true), 300) } },
-                { label: isLoggedIn ? 'Мій кабінет' : 'Увійти', action: () => { closeMenu(); setTimeout(handleUserClick, 300) } },
-                { label: 'Зв\'язатись', action: () => { closeMenu(); setTimeout(scrollToFooter, 300) } },
-                { label: 'Кошик', action: () => { closeMenu(); openCart(true) } },
+                { label: t('nav.catalog'),  action: () => { closeMenu(); scrollToCatalog() } },
+                { label: t('nav.about'),    action: () => { closeMenu(); setTimeout(() => setShowAbout(true), 300) } },
+                { label: isLoggedIn ? t('nav.cabinet') : t('nav.login'), action: () => { closeMenu(); setTimeout(handleUserClick, 300) } },
+                { label: t('nav.contact'),  action: () => { closeMenu(); setTimeout(scrollToFooter, 300) } },
+                { label: t('nav.cart'),     action: () => { closeMenu(); openCart(true) } },
               ].map(({ label, action }) => (
                 <a key={label} onClick={action} className="flex items-center justify-between py-4 border-b border-cream-300 text-sm tracking-widest2 uppercase font-sans text-stone-600 hover:text-stone-950 transition-colors group cursor-pointer">
                   {label}
-                  {label === 'Кошик' && totalCount > 0
+                  {label === t('nav.cart') && totalCount > 0
                     ? <span className="w-5 h-5 bg-stone-950 text-cream-100 text-xs rounded-full flex items-center justify-center">{totalCount}</span>
                     : <span className="text-stone-300 group-hover:text-stone-600 transition-colors">→</span>
                   }
@@ -122,8 +127,8 @@ export default function Header({ onHome }) {
               ))}
             </nav>
             <div className="px-6 py-6 border-t border-cream-300">
-              <p className="index-label text-stone-400">Уся Україна</p>
-              <p className="font-display italic text-stone-400 text-sm mt-1">Ручна робота</p>
+              <p className="index-label text-stone-400">Worldwide shipping</p>
+              <p className="font-display italic text-stone-400 text-sm mt-1">Handmade</p>
             </div>
           </div>
           <style>{`@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}`}</style>
@@ -132,8 +137,8 @@ export default function Header({ onHome }) {
       )}
 
       {showAbout && createPortal(<AboutModal onClose={() => setShowAbout(false)} />, document.body)}
-      {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
-      {showUser && <UserDrawer onClose={() => setShowUser(false)} />}
+      {showAuth  && <AuthModal  onClose={() => setShowAuth(false)} />}
+      {showUser  && <UserDrawer onClose={() => setShowUser(false)} />}
     </>
   )
 }

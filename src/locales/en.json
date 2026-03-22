@@ -1,0 +1,109 @@
+{
+  "nav": {
+    "catalog": "Catalog",
+    "about": "About",
+    "contact": "Contact",
+    "cart": "Cart",
+    "cabinet": "My Account",
+    "login": "Sign In"
+  },
+  "hero": {
+    "collection": "— Collection 2026",
+    "title_1": "Jewelry",
+    "title_2": "that stays",
+    "title_3": "with you.",
+    "description": "Handmade jewelry from beads and minerals. Each piece is unique.",
+    "stat_categories": "Categories",
+    "stat_orders": "Custom orders completed",
+    "stat_metal": "Metal grade"
+  },
+  "catalog": {
+    "label": "Catalog",
+    "items": "items",
+    "back": "Back to catalog"
+  },
+  "product": {
+    "material": "Material",
+    "description": "Description",
+    "add_to_cart": "Add to cart",
+    "added": "✓ Added to cart",
+    "view": "View",
+    "no_products": "Products coming soon"
+  },
+  "cart": {
+    "title": "Cart",
+    "positions": "items",
+    "empty": "Your cart is empty",
+    "remove": "remove",
+    "checkout": "Checkout →",
+    "note": "We will contact you to confirm the order"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "your_order": "Your order",
+    "units": "items",
+    "your_data": "Your details",
+    "name": "Full name *",
+    "phone": "Phone *",
+    "email": "Email *",
+    "comment": "Comment",
+    "comment_placeholder": "Special requests...",
+    "submit": "Confirm order",
+    "submitting": "Sending...",
+    "after_note": "After confirmation Hanna will contact you to clarify the details",
+    "error": "Sending failed. Please try again or contact us directly.",
+    "success_title": "Thank you!",
+    "success_text": "Your order has been sent. Hanna will contact you shortly.",
+    "close": "Close"
+  },
+  "user": {
+    "cabinet": "Account",
+    "guest": "Guest",
+    "profile_tab": "Profile",
+    "wishlist_tab": "Wishlist",
+    "history_tab": "Viewed",
+    "name_label": "Name",
+    "phone_label": "Phone",
+    "email_label": "Email",
+    "not_set": "not set",
+    "edit": "Edit details",
+    "save": "Save",
+    "cancel": "Cancel",
+    "logout": "Sign out",
+    "wishlist_empty": "Nothing added yet",
+    "wishlist_hint": "Tap ♡ on a product to save it",
+    "history_empty": "History is empty",
+    "add_to_cart": "+ add to cart",
+    "clear_wishlist": "Clear wishlist",
+    "clear_history": "Clear history"
+  },
+  "auth": {
+    "title": "Personal account",
+    "subtitle": "Sign in / Register",
+    "description": "Save your details so you don't have to enter them every time. Data is stored only in your browser.",
+    "name": "Name *",
+    "phone": "Phone",
+    "email": "Email",
+    "submit": "Save and sign in",
+    "skip": "Skip",
+    "error": "Please enter your name and at least one contact"
+  },
+  "footer": {
+    "tagline": "Handmade jewelry from beads and minerals. Custom orders | ready-made pieces | restoration of your old jewelry. Worldwide shipping.",
+    "contact": "Contact me",
+    "social": "Social media",
+    "copyright": "© 2026 BONNIEBEAD · All rights reserved",
+    "made_with": "Made with attention to detail"
+  },
+  "about": {
+    "label": "About the author",
+    "close": "Close",
+    "p1": "My story: From the first bracelet to BonnieBead.",
+    "p2": "My journey into the world of beads began by chance. I saw a stunning twisted bracelet on someone's wrist and instantly felt: I CAN make one myself. I was 23, living in Kyiv, and had no idea that this impulse would turn into my life's passion.",
+    "p3": "It all started with that first bracelet I made for myself. Then my sisters wanted one, then colleagues at work. Friends started bringing ideas from the internet, asking me to create something unique just for them. Before I knew it, my apartment was filled with boxes of beads, threads and hardware, with barely any free space left!",
+    "p4": "That's how my brand BonnieBead was born in 2019. Every piece I create is a balance between classic and contemporary, elegance and simplicity. For me it's important that jewelry is not just an accessory, but a little story.",
+    "p5": "A special place in my work is the children's collection. It was born in 2020 when I made a puppy pendant for a little girl who had lost her pet. This inspired me to create a whole series of animal jewelry, now loved by children and adults alike.",
+    "p6": "After a short break (2022-2024) I'm returning to work with new energy and hundreds of ideas in my notebook. I'm reopening my Etsy shop, launching my website and ready to share the beauty hidden in every little detail. Thank you for being with me on this journey. With love, B.B."
+  },
+  "ukraine": "Worldwide shipping"
+}

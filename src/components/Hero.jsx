@@ -1,32 +1,38 @@
+import { useTranslation } from 'react-i18next'
+
 export default function Hero() {
+  const { t } = useTranslation()
+
   return (
     <section className="max-w-screen-xl mx-auto px-6 md:px-12 pt-16 pb-20 md:pt-24 md:pb-28">
       <div className="grid grid-cols-12 gap-4 items-end">
-        {/* Big headline */}
         <div className="col-span-12 md:col-span-8">
-          <p className="index-label mb-5">— Колекція 2026</p>
+          <a
+            href="#catalog"
+            onClick={e => { e.preventDefault(); document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }) }}
+            className="index-label mb-5 cursor-pointer hover:text-stone-700 transition-colors inline-block"
+          >
+            {t('hero.collection')}
+          </a>
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-medium leading-[1.05] tracking-tight text-stone-950">
-            Прикраси,<br />
-            <em className="font-normal italic">що лишаються</em><br />
-            з вами.
+            {t('hero.title_1')}<br />
+            <em className="font-normal italic">{t('hero.title_2')}</em><br />
+            {t('hero.title_3')}
           </h1>
         </div>
-
-        {/* Side note */}
         <div className="col-span-12 md:col-span-4 md:text-right pb-2">
           <p className="font-sans text-sm text-stone-500 leading-relaxed max-w-xs md:ml-auto">
-            Ювелірні вироби ручної роботи з дорогоцінних металів та каменів. Кожна прикраса — унікальна.
+            {t('hero.description')}
           </p>
         </div>
       </div>
 
-      {/* Thin line with stats */}
       <div className="rule mt-12 mb-8" />
       <div className="flex flex-wrap gap-8 md:gap-16">
         {[
-          ['9', 'Категорій'],
-          ['400+', 'Виконаних індивідуальних замовлень'],
-          ['AISI 316L/18К/24К', 'Проби металу'],
+          ['9',           t('hero.stat_categories')],
+          ['400+',        t('hero.stat_orders')],
+          ['AISI 316L/18К/24К', t('hero.stat_metal')],
         ].map(([val, label]) => (
           <div key={label}>
             <p className="font-display text-xl font-medium text-stone-950">{val}</p>
