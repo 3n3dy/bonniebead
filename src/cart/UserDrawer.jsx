@@ -14,10 +14,6 @@ export default function UserDrawer({ onClose }) {
     wishlist, toggleWishlist, clearWishlist,
     history, clearHistory,
   } = useUser()
-  const { add, setIsOpen: openCart } = useCart()
-
-  const [editing, setEditing] = useState(false)
-  const [draft, setDraft] = useState(profile)
 
   const saveProfile = () => { updateProfile(draft); setEditing(false) }
 

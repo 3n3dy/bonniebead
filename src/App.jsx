@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useParams, useNavigate, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useParams, useNavigate, Navigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { AdminProvider, useAdmin } from './admin/AdminContext'
 import AdminLogin from './admin/AdminLogin'
@@ -170,10 +170,19 @@ function AdminRoute() {
   return isAdmin ? <AdminPanel /> : <AdminLogin />
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
 export default function App() {
   const isAdmin = window.location.pathname === '/admin' || window.location.search.includes('admin')
   return (
     <BrowserRouter>
+     <ScrollToTop />
       <AdminProvider>
         {isAdmin ? <AdminRoute /> : <PublicSite />}
       </AdminProvider>

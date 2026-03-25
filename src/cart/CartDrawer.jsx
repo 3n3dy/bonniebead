@@ -8,6 +8,7 @@ export default function CartDrawer() {
   const { items, isOpen, setIsOpen, remove, updateQty, totalCount } = useCart()
   const { t } = useTranslation()
   const [showCheckout, setShowCheckout] = useState(false)
+  
 
   if (!isOpen && !showCheckout) return null
 
