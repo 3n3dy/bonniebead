@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 const CONTACTS = {
-  email: 'bonniebead@gmail.com',
+  email: 'bonniebeadshop@gmail.com',
   instagram: 'https://www.instagram.com/bonniebead/',
   facebook: 'https://www.facebook.com/bonniebeadshop',
   etsy: 'https://www.etsy.com/shop/hannabonniebead/',
@@ -25,13 +25,13 @@ export default function Footer() {
             <p className="text-xs tracking-widest2 uppercase text-stone-500 mb-6 font-sans">{t('footer.contact')}</p>
             <div className="space-y-6 text-sm text-stone-300">
               <div>
-                <span className="block text-xs uppercase tracking-widest2 text-stone-600 mb-1.5">Email</span>
+                <span className="block text-xs uppercase tracking-widest2 text-stone-500 mb-1.5">Email</span>
                 <a href={`mailto:${CONTACTS.email}`} className="hover:text-cream-100 underline-offset-4 hover:underline transition-colors break-all">
                   {CONTACTS.email}
                 </a>
               </div>
               <div>
-                <span className="block text-xs uppercase tracking-widest2 text-stone-600 mb-2">{t('footer.social')}</span>
+                <span className="block text-xs uppercase tracking-widest2 text-stone-500 mb-2">{t('footer.social')}</span>
                 <ul className="space-y-2">
                   {[
                     { label: 'Instagram', href: CONTACTS.instagram },
@@ -51,11 +51,17 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
-        <div className="border-t border-stone-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="index-label text-stone-600">{t('footer.copyright')}</p>
-          <p className="font-display italic text-stone-700 text-sm">{t('footer.made_with')}</p>
-        </div>
+<div className="border-t border-stone-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
+  <p className="index-label text-stone-600">{t('footer.copyright')}</p>
+  <a
+    href="https://w3bedy.com"
+    target="_blank"
+    rel="noreferrer"
+    className="index-label text-stone-700 hover:text-stone-500 transition-colors">
+    Розробник
+  </a>
+  <p className="font-display italic text-stone-700 text-sm">{t('footer.made_with')}</p>
+</div>
       </div>
     </footer>
   )
