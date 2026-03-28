@@ -3,6 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { useCart } from '../cart/CartContext'
 import { useUser } from '../user/UserContext'
 
+const AVAILABILITY = {
+  in_stock: { label: 'Є в наявності',   labelEN: 'In stock',    bg: 'bg-green-900/80',  text: 'text-green-300' },
+  on_order: { label: 'Під замовлення',  labelEN: 'On order',    bg: 'bg-yellow-900/80', text: 'text-yellow-300' },
+}
+
 export default function ProductCard({ product, catName, onOpenProduct }) {
   const { t, i18n } = useTranslation()
   const { add } = useCart()
@@ -15,6 +20,8 @@ export default function ProductCard({ product, catName, onOpenProduct }) {
   const images = product.images?.length ? product.images : product.image ? [product.image] : []
   const [active, setActive] = useState(0)
   const wishlisted = isWishlisted(product.id)
+
+  const avail = product.availability ? AVAILABILITY[product.availability] : null
 
   const handleAdd = (e) => {
     e.stopPropagation()
@@ -39,6 +46,13 @@ export default function ProductCard({ product, catName, onOpenProduct }) {
             <div className="w-10 h-10 border border-cream-400 rounded-full flex items-center justify-center">
               <div className="w-3 h-3 rounded-full bg-cream-400" />
             </div>
+          </div>
+        )}
+
+        {/* Бейдж наявності */}
+        {avail && (
+          <div className={`absolute bottom-2 left-2 px-2 py-0.5 text-xs font-sans tracking-wide rounded-sm ${avail.bg} ${avail.text}`}>
+            {isEN ? avail.labelEN : avail.label}
           </div>
         )}
 

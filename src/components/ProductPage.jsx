@@ -19,15 +19,15 @@ function useProductMeta(product, name, description) {
 
     // OG теги
     const ogTitle = document.querySelector('meta[property="og:title"]')
-    const ogDesc  = document.querySelector('meta[property="og:description"]')
+    const ogDesc = document.querySelector('meta[property="og:description"]')
     const ogImage = document.querySelector('meta[property="og:image"]')
 
     const prevOgTitle = ogTitle?.getAttribute('content')
-    const prevOgDesc  = ogDesc?.getAttribute('content')
+    const prevOgDesc = ogDesc?.getAttribute('content')
     const prevOgImage = ogImage?.getAttribute('content')
 
     if (ogTitle) ogTitle.setAttribute('content', `${name} · BONNIEBEAD`)
-    if (ogDesc)  ogDesc.setAttribute('content', seoText)
+    if (ogDesc) ogDesc.setAttribute('content', seoText)
     if (ogImage && product.images?.[0]) ogImage.setAttribute('content', product.images[0])
 
     // Canonical
@@ -40,7 +40,7 @@ function useProductMeta(product, name, description) {
       document.title = prevTitle
       if (metaDesc) metaDesc.setAttribute('content', prevDesc)
       if (ogTitle && prevOgTitle) ogTitle.setAttribute('content', prevOgTitle)
-      if (ogDesc  && prevOgDesc)  ogDesc.setAttribute('content', prevOgDesc)
+      if (ogDesc && prevOgDesc) ogDesc.setAttribute('content', prevOgDesc)
       if (ogImage && prevOgImage) ogImage.setAttribute('content', prevOgImage)
       if (canonical && prevCanonical) canonical.setAttribute('href', prevCanonical)
     }
@@ -57,9 +57,9 @@ export default function ProductPage({ product, category, onBack }) {
   const [copied, setCopied] = useState(false)
 
   const isEN = i18n.language === 'en'
-  const name        = isEN && product.nameEN        ? product.nameEN        : product.name
+  const name = isEN && product.nameEN ? product.nameEN : product.name
   const description = isEN && product.descriptionEN ? product.descriptionEN : product.description
-  const catName     = isEN && category.nameEN       ? category.nameEN       : category.name
+  const catName = isEN && category.nameEN ? category.nameEN : category.name
 
   // Оновлюємо мета теги
   useProductMeta(product, name, description)
@@ -137,7 +137,18 @@ export default function ProductPage({ product, category, onBack }) {
             <h1 className="font-display text-3xl md:text-4xl font-medium text-stone-950 leading-tight mb-3">{name}</h1>
 
             {product.price && (
-              <p className="font-display text-3xl font-medium text-stone-950 mb-6">{product.price}</p>
+              <p className="font-display text-3xl font-medium text-stone-950 mb-3">{product.price}</p>
+            )}
+            {product.availability && (
+              <div className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs tracking-wide font-sans mb-5 ${product.availability === 'in_stock'
+                  ? 'bg-green-50 text-green-700 border border-green-200'
+                  : 'bg-yellow-50 text-yellow-700 border border-yellow-200'
+                }`}>
+                {product.availability === 'in_stock'
+                  ? (isEN ? '✓ In stock' : '✓ Є в наявності')
+                  : (isEN ? '◷ On order' : '◷ Під замовлення')
+                }
+              </div>
             )}
 
             <div className="w-8 h-px bg-blush mb-6" />
@@ -170,7 +181,7 @@ export default function ProductPage({ product, category, onBack }) {
             <button onClick={copyLink}
               className="flex items-center gap-2 text-xs text-stone-400 hover:text-stone-700 transition-colors tracking-wide w-fit">
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                <path d="M8 1h4v4M12 1L6 7M5 3H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+                <path d="M8 1h4v4M12 1L6 7M5 3H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
               </svg>
               {copied
                 ? (isEN ? '✓ Copied!' : '✓ Скопійовано!')

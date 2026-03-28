@@ -35,7 +35,6 @@ export default function Hero() {
         <div className="rule mt-12 mb-8" />
         <div className="flex flex-wrap gap-8 md:gap-16">
           {[
-            ['9',                  t('hero.stat_categories')],
             ['400+',               t('hero.stat_orders')],
             ['AISI 316L/18К/24К', t('hero.stat_metal')],
           ].map(([val, label]) => (

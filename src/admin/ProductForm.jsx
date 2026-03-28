@@ -64,6 +64,7 @@ export default function ProductForm({ initial = {}, onSave, onClose }) {
   const [description, setDescription]         = useState(initial.description || '')
   const [descriptionEN, setDescriptionEN]     = useState(initial.descriptionEN || '')
   const [seoDescription, setSeoDescription]   = useState(initial.seoDescription || '')
+  const [availability, setAvailability]       = useState(initial.availability || 'in_stock')
   const [urls, setUrls] = useState(() => {
     if (initial.images?.length) return [...initial.images, '', ''].slice(0, 3)
     if (initial.image) return [initial.image, '', '']
@@ -84,6 +85,7 @@ export default function ProductForm({ initial = {}, onSave, onClose }) {
       description: description.trim(),
       descriptionEN: descriptionEN.trim(),
       seoDescription: seoDescription.trim(),
+      availability,
       images,
       image: images[0] || '',
     })
@@ -106,7 +108,37 @@ export default function ProductForm({ initial = {}, onSave, onClose }) {
       <Field label="Опис (УКР)" value={description} onChange={setDescription} multiline placeholder="Короткий опис..." />
       <Field label="Description (EN)" value={descriptionEN} onChange={setDescriptionEN} multiline placeholder="Short description..." />
 
-      {/* SEO секція */}
+      {/* Наявність */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-3">
+          <div className="h-px flex-1 bg-stone-800" />
+          <span className="text-xs tracking-widest uppercase text-stone-600">Наявність</span>
+          <div className="h-px flex-1 bg-stone-800" />
+        </div>
+        <div className="flex gap-2">
+          {[
+            { value: 'in_stock', label: '✓ Є в наявності' },
+            { value: 'on_order', label: '◷ Під замовлення' },
+          ].map(opt => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => setAvailability(opt.value)}
+              className={`flex-1 py-2.5 text-xs tracking-widest uppercase border transition-colors ${
+                availability === opt.value
+                  ? opt.value === 'in_stock'
+                    ? 'border-green-700 text-green-400 bg-green-950/30'
+                    : 'border-yellow-700 text-yellow-400 bg-yellow-950/30'
+                  : 'border-stone-700 text-stone-500 hover:border-stone-500'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* SEO */}
       <div className="space-y-2 pt-1">
         <div className="flex items-center gap-3">
           <div className="h-px flex-1 bg-stone-800" />
@@ -114,22 +146,18 @@ export default function ProductForm({ initial = {}, onSave, onClose }) {
           <div className="h-px flex-1 bg-stone-800" />
         </div>
         <p className="text-xs text-stone-600 leading-relaxed">
-          Не показується на сайті — лише для пошукових систем. Пишіть ключові слова англійською через кому або пробіл.
+          Не показується на сайті — лише для пошукових систем.
         </p>
         <div>
-          <label className="block text-xs tracking-widest uppercase text-stone-500 mb-1.5">
-            SEO Keywords / Description (EN)
-          </label>
+          <label className="block text-xs tracking-widest uppercase text-stone-500 mb-1.5">SEO Keywords (EN)</label>
           <textarea
             value={seoDescription}
             onChange={e => setSeoDescription(e.target.value)}
-            placeholder="handmade beaded bracelet minerals ukraine boho jewelry gift for her"
+            placeholder="handmade beaded bracelet minerals ukraine boho jewelry gift"
             rows={2}
             className="w-full bg-stone-900 border border-stone-700 focus:border-blush text-cream-100 placeholder-stone-600 text-sm px-3 py-2.5 outline-none transition-colors resize-none"
           />
-          <p className="text-xs text-stone-700 mt-1">
-            {seoDescription.length}/160 символів (рекомендовано до 160)
-          </p>
+          <p className="text-xs text-stone-700 mt-1">{seoDescription.length}/160</p>
         </div>
       </div>
 

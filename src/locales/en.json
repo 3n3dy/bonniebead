@@ -10,8 +10,8 @@
   "hero": {
     "collection": "— Collection 2026",
     "title_1": "Jewelry",
-    "title_2": "that stays",
-    "title_3": "with you.",
+    "title_2": "as unique",
+    "title_3": "as you are.",
     "description": "Handmade jewelry from beads and minerals. Each piece is unique.",
     "stat_categories": "Categories",
     "stat_orders": "Custom orders completed",
@@ -20,7 +20,8 @@
   "catalog": {
     "label": "Catalog",
     "items": "items",
-    "back": "Back to catalog"
+    "back": "Back to catalog",
+    "categories": "categories"
   },
   "product": {
     "material": "Material",

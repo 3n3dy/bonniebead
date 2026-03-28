@@ -10,7 +10,7 @@ export default function CatalogGrid({ categories, onSelect }) {
           <div className="rule-blush w-8" />
           <p className="text-xs tracking-widest2 uppercase font-sans text-stone-500">{t('catalog.label')}</p>
         </div>
-        <p className="index-label">{categories.length} {t('catalog.label').toLowerCase()}</p>
+        <p className="index-label">{categories.length} {t('catalog.categories')}</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-cream-300">
