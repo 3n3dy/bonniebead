@@ -58,7 +58,7 @@ export default function Footer() {
     target="_blank"
     rel="noreferrer"
     className="index-label text-stone-700 hover:text-stone-500 transition-colors">
-    Розробник
+    Розробка - w3bedy.com
   </a>
   <p className="font-display italic text-stone-700 text-sm">{t('footer.made_with')}</p>
 </div>
