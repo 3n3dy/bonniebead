@@ -3,8 +3,10 @@ import { useTranslation } from 'react-i18next'
 import ProductCard from './ProductCard'
 
 function parsePrice(priceStr = '') {
-  const num = parseFloat(priceStr.replace(/[^\d.]/g, ''))
-  return isNaN(num) ? Infinity : num
+  if (!priceStr) return Infinity // порожній → в кінець
+  const cleaned = priceStr.replace(/\s/g, '').replace(/[^\d.,]/g, '').replace(',', '.')
+  const num = parseFloat(cleaned)
+  return isNaN(num) ? Infinity : num  // нечислове → в кінець
 }
 
 export default function CategoryPage({ category, onBack, onProductClick }) {
@@ -17,20 +19,24 @@ export default function CategoryPage({ category, onBack, onProductClick }) {
 
   const sortedProducts = useMemo(() => {
     const products = [...category.products]
-    if (sort === 'az') {
-      return products.sort((a, b) => {
-        const nameA = isEN && a.nameEN ? a.nameEN : a.name
-        const nameB = isEN && b.nameEN ? b.nameEN : b.name
-        return nameA.localeCompare(nameB, isEN ? 'en' : 'uk')
-      })
-      if (sort === 'price_desc') {
+
+    switch (sort) {
+      case 'az':
+        return products.sort((a, b) => {
+          const nameA = isEN && a.nameEN ? a.nameEN : a.name
+          const nameB = isEN && b.nameEN ? b.nameEN : b.name
+          return nameA.localeCompare(nameB, isEN ? 'en' : 'uk')
+        })
+
+      case 'price_desc':
         return products.sort((a, b) => parsePrice(b.price) - parsePrice(a.price))
-      }
+
+      case 'price_asc':
+        return products.sort((a, b) => parsePrice(a.price) - parsePrice(b.price))
+
+      default:
+        return products
     }
-    if (sort === 'price_asc') {
-      return products.sort((a, b) => parsePrice(a.price) - parsePrice(b.price))
-    }
-    return products
   }, [category.products, sort, isEN])
 
   return (

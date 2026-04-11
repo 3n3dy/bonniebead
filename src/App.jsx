@@ -31,7 +31,7 @@ function Layout({ children }) {
 
   const goHome = () => {
     navigate(i18n.language === 'en' ? '/en' : '/')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }
 
   return (
@@ -173,7 +173,7 @@ function AdminRoute() {
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [pathname])
   return null
 }
