@@ -1,51 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCart } from '../cart/CartContext'
 import { useUser } from '../user/UserContext'
-
-// Оновлює мета теги в <head> для поточного товару
-function useProductMeta(product, name, description) {
-  useEffect(() => {
-    const prevTitle = document.title
-
-    // Title
-    document.title = `${name} · BONNIEBEAD`
-
-    // Meta description — SEO поле або звичайний опис
-    const metaDesc = document.querySelector('meta[name="description"]')
-    const prevDesc = metaDesc?.getAttribute('content') || ''
-    const seoText = product.seoDescription || description || ''
-    if (metaDesc) metaDesc.setAttribute('content', seoText)
-
-    // OG теги
-    const ogTitle = document.querySelector('meta[property="og:title"]')
-    const ogDesc = document.querySelector('meta[property="og:description"]')
-    const ogImage = document.querySelector('meta[property="og:image"]')
-
-    const prevOgTitle = ogTitle?.getAttribute('content')
-    const prevOgDesc = ogDesc?.getAttribute('content')
-    const prevOgImage = ogImage?.getAttribute('content')
-
-    if (ogTitle) ogTitle.setAttribute('content', `${name} · BONNIEBEAD`)
-    if (ogDesc) ogDesc.setAttribute('content', seoText)
-    if (ogImage && product.images?.[0]) ogImage.setAttribute('content', product.images[0])
-
-    // Canonical
-    let canonical = document.querySelector('link[rel="canonical"]')
-    const prevCanonical = canonical?.getAttribute('href')
-    if (canonical) canonical.setAttribute('href', window.location.href)
-
-    // Cleanup — відновлюємо при виході зі сторінки
-    return () => {
-      document.title = prevTitle
-      if (metaDesc) metaDesc.setAttribute('content', prevDesc)
-      if (ogTitle && prevOgTitle) ogTitle.setAttribute('content', prevOgTitle)
-      if (ogDesc && prevOgDesc) ogDesc.setAttribute('content', prevOgDesc)
-      if (ogImage && prevOgImage) ogImage.setAttribute('content', prevOgImage)
-      if (canonical && prevCanonical) canonical.setAttribute('href', prevCanonical)
-    }
-  }, [product.id, name])
-}
+import { usePageMeta } from '../hooks/usePageMeta'
 
 export default function ProductPage({ product, category, onBack }) {
   const { t, i18n } = useTranslation()
@@ -57,12 +14,19 @@ export default function ProductPage({ product, category, onBack }) {
   const [copied, setCopied] = useState(false)
 
   const isEN = i18n.language === 'en'
+  const lang = i18n.language
   const name = isEN && product.nameEN ? product.nameEN : product.name
   const description = isEN && product.descriptionEN ? product.descriptionEN : product.description
   const catName = isEN && category.nameEN ? category.nameEN : category.name
 
   // Оновлюємо мета теги
-  useProductMeta(product, name, description)
+  const seoText = product.seoDescription || description || ''
+  usePageMeta({
+    title: `${name} · BONNIEBEAD`,
+    description: seoText,
+    ogImage: product.images?.[0] || undefined,
+    lang,
+  })
 
   const images = product.images?.length ? product.images : product.image ? [product.image] : []
   const wishlisted = isWishlisted(product.id)

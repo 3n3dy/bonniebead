@@ -13,6 +13,8 @@ import CatalogGrid from './components/CatalogGrid'
 import CategoryPage from './components/CategoryPage'
 import ProductPage from './components/ProductPage'
 import Footer from './components/Footer'
+import { usePageMeta } from './hooks/usePageMeta'
+import { HOSTNAME } from './hooks/usePageMeta'
 
 // ── Slug утиліта ─────────────────────────────────────────────────────────
 export function toSlug(str = '') {
@@ -50,6 +52,18 @@ function HomePage() {
   const navigate = useNavigate()
   const { i18n } = useTranslation()
   const lang = i18n.language
+  const isEN = lang === 'en'
+
+  usePageMeta({
+    title: isEN
+      ? 'BONNIEBEAD · Handmade Beaded Jewelry'
+      : 'BONNIEBEAD · Прикраси ручної роботи з бісеру',
+    description: isEN
+      ? 'Handmade jewelry from beads and minerals. Custom orders, bracelets, earrings, necklaces. Worldwide shipping from Ukraine.'
+      : 'Прикраси ручної роботи з бісеру та мінералів. Індивідуальні замовлення, браслети, сережки, намисто. Відправка по всій Україні.',
+    ogImage: `${HOSTNAME}/og-image.jpg`,
+    lang,
+  })
 
   const handleSelect = (catId) => {
     const cat = catalog.find(c => c.id === catId)
