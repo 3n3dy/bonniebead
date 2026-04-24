@@ -84,7 +84,7 @@ export default function ProductPage({ product, category, onBack }) {
     <div className="min-h-screen">
       {/* Breadcrumb */}
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 py-4">
-        <div className="flex items-center gap-2 text-xs text-stone-400 font-sans tracking-wide">
+        <div className="flex items-center gap-2 text-xs text-stone-400 font-display tracking-wide">
           <button onClick={onBack} className="hover:text-stone-700 transition-colors">{catName}</button>
           <span>/</span>
           <span className="text-stone-600">{name}</span>
@@ -140,7 +140,7 @@ export default function ProductPage({ product, category, onBack }) {
               <p className="font-display text-3xl font-medium text-stone-950 mb-3">{product.price}</p>
             )}
             {product.availability && (
-              <div className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs tracking-wide font-sans mb-5 ${product.availability === 'in_stock'
+              <div className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs tracking-wide font-display mb-5 ${product.availability === 'in_stock'
                   ? 'bg-green-50 text-green-700 border border-green-200'
                   : 'bg-yellow-50 text-yellow-700 border border-yellow-200'
                 }`}>

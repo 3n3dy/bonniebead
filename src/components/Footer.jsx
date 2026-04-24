@@ -18,11 +18,11 @@ export default function Footer() {
             <p className="font-display text-4xl font-medium tracking-widest2 text-cream-100 mb-1">HANNA</p>
             <p className="font-display text-lg tracking-widest2 text-blush mb-6">BONNIEBEAD</p>
             <div className="w-8 h-px bg-blush mb-6" />
-            <p className="font-sans text-sm text-stone-400 leading-relaxed max-w-md">{t('footer.tagline')}</p>
+            <p className="font-display text-sm text-stone-400 leading-relaxed max-w-md">{t('footer.tagline')}</p>
           </div>
 
           <div className="md:border-l md:border-stone-800 md:pl-10">
-            <p className="text-xs tracking-widest2 uppercase text-stone-500 mb-6 font-sans">{t('footer.contact')}</p>
+            <p className="text-xs tracking-widest2 uppercase text-stone-500 mb-6 font-display">{t('footer.contact')}</p>
             <div className="space-y-6 text-sm text-stone-300">
               <div>
                 <span className="block text-xs uppercase tracking-widest2 text-stone-500 mb-1.5">Email</span>

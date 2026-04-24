@@ -12,9 +12,9 @@ import UserDrawer from '../user/UserDrawer'
 export default function Header({ onHome }) {
   const { t } = useTranslation()
   const [showAbout, setShowAbout] = useState(false)
-  const [showAuth,  setShowAuth]  = useState(false)
-  const [showUser,  setShowUser]  = useState(false)
-  const [menuOpen,  setMenuOpen]  = useState(false)
+  const [showAuth, setShowAuth] = useState(false)
+  const [showUser, setShowUser] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const { totalCount, setIsOpen: openCart } = useCart()
   const { isLoggedIn } = useUser()
@@ -33,8 +33,8 @@ export default function Header({ onHome }) {
   const UserIcon = () => (
     <button onClick={handleUserClick} className="relative flex items-center text-stone-500 hover:text-stone-950 transition-colors" title={isLoggedIn ? t('nav.cabinet') : t('nav.login')}>
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <circle cx="9" cy="6" r="3" stroke="currentColor" strokeWidth="1.2"/>
-        <path d="M2 16c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+        <circle cx="9" cy="6" r="3" stroke="currentColor" strokeWidth="1.2" />
+        <path d="M2 16c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
       {isLoggedIn && <span className="absolute -top-1 -right-1 w-2 h-2 bg-blush rounded-full" />}
     </button>
@@ -43,9 +43,9 @@ export default function Header({ onHome }) {
   const CartIcon = () => (
     <button onClick={() => openCart(true)} className="relative flex items-center text-stone-500 hover:text-stone-950 transition-colors">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <path d="M1 1h2.5l1.8 8.5h8.4l1.5-5.5H5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="8" cy="15.5" r="1" fill="currentColor"/>
-        <circle cx="13" cy="15.5" r="1" fill="currentColor"/>
+        <path d="M1 1h2.5l1.8 8.5h8.4l1.5-5.5H5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="8" cy="15.5" r="1" fill="currentColor" />
+        <circle cx="13" cy="15.5" r="1" fill="currentColor" />
       </svg>
       {totalCount > 0 && (
         <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-stone-950 text-cream-100 text-xs rounded-full flex items-center justify-center leading-none">
@@ -62,28 +62,41 @@ export default function Header({ onHome }) {
         <div className="max-w-screen-xl mx-auto px-6 md:px-12 h-16 flex items-center">
 
           {/* Left — desktop nav / mobile порожньо */}
-          <div className="flex-1">
-            <nav className="hidden md:flex items-center gap-8">
-              <a onClick={scrollToCatalog} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
-                {t('nav.catalog')}
-              </a>
-              <a onClick={() => setShowAbout(true)} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
-                {t('nav.about')}
-              </a>
-            </nav>
-          </div>
+<div className="flex-1">
+  <nav className="hidden md:flex items-center gap-8 font-display">
+    <a
+      onClick={scrollToCatalog}
+      className="link-underline text-xs tracking-widest2 uppercase text-stone-500 hover:text-stone-950 transition-colors cursor-pointer"
+    >
+      {t('nav.catalog')}
+    </a>
+    <a
+      onClick={() => setShowAbout(true)}
+      className="link-underline text-xs tracking-widest2 uppercase text-stone-500 hover:text-stone-950 transition-colors cursor-pointer"
+    >
+      {t('nav.about')}
+    </a>
+  </nav>
+</div>
+
+
 
           {/* Center — wordmark завжди по центру */}
-          <button onClick={onHome} className="font-display text-xl tracking-widest2 md:text-2xl font-medium text-stone-950 hover:opacity-70 transition-opacity">
+          <button
+            onClick={onHome}
+            style={{ fontFamily: 'Megrim, serif' }}
+            className="text-xl tracking-widest2 md:text-2xl text-stone-950 hover:opacity-70 transition-opacity"
+          >
             BONNIEBEAD
           </button>
+
 
           {/* Right — desktop + mobile */}
           <div className="flex-1 flex items-center justify-end gap-3 md:gap-4">
             {/* Desktop */}
             <div className="hidden md:flex items-center gap-4">
               <LangSwitcher />
-              <a onClick={scrollToFooter} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
+              <a onClick={scrollToFooter} className="link-underline text-xs tracking-widest2 uppercase font-display text-stone-500 hover:text-stone-950 transition-colors cursor-pointer">
                 {t('nav.contact')}
               </a>
               <UserIcon />
@@ -111,18 +124,18 @@ export default function Header({ onHome }) {
           <div className="absolute inset-0 bg-stone-950/50 backdrop-blur-sm" onClick={closeMenu} style={{ animation: 'fadeIn 0.25s ease both' }} />
           <div className="absolute top-0 right-0 h-full w-72 bg-cream-100 flex flex-col shadow-2xl" style={{ animation: 'slideIn 0.3s cubic-bezier(0.16,1,0.3,1) both' }}>
             <div className="flex items-center justify-between px-6 py-5 border-b border-cream-300">
-              <span className="font-display text-xl tracking-widest2 font-medium text-stone-950">BONNIEBEAD</span>
+              <span className="font-megrim text-xl tracking-widest2 font-medium text-stone-950">BONNIEBEAD</span>
               <button onClick={closeMenu} className="w-8 h-8 flex items-center justify-center text-stone-400 hover:text-stone-950 text-xl">✕</button>
             </div>
             <nav className="flex flex-col px-6 py-6 flex-1">
               {[
-                { label: t('nav.catalog'),  action: () => { closeMenu(); scrollToCatalog() } },
-                { label: t('nav.about'),    action: () => { closeMenu(); setTimeout(() => setShowAbout(true), 300) } },
+                { label: t('nav.catalog'), action: () => { closeMenu(); scrollToCatalog() } },
+                { label: t('nav.about'), action: () => { closeMenu(); setTimeout(() => setShowAbout(true), 300) } },
                 { label: isLoggedIn ? t('nav.cabinet') : t('nav.login'), action: () => { closeMenu(); setTimeout(handleUserClick, 300) } },
-                { label: t('nav.contact'),  action: () => { closeMenu(); setTimeout(scrollToFooter, 300) } },
-                { label: t('nav.cart'),     action: () => { closeMenu(); openCart(true) } },
+                { label: t('nav.contact'), action: () => { closeMenu(); setTimeout(scrollToFooter, 300) } },
+                { label: t('nav.cart'), action: () => { closeMenu(); openCart(true) } },
               ].map(({ label, action }) => (
-                <a key={label} onClick={action} className="flex items-center justify-between py-4 border-b border-cream-300 text-sm tracking-widest2 uppercase font-sans text-stone-600 hover:text-stone-950 transition-colors group cursor-pointer">
+                <a key={label} onClick={action} className="flex items-center justify-between py-4 border-b border-cream-300 text-sm tracking-widest2 uppercase font-display text-stone-600 hover:text-stone-950 transition-colors group cursor-pointer">
                   {label}
                   {label === t('nav.cart') && totalCount > 0
                     ? <span className="w-5 h-5 bg-stone-950 text-cream-100 text-xs rounded-full flex items-center justify-center">{totalCount}</span>
@@ -142,8 +155,8 @@ export default function Header({ onHome }) {
       )}
 
       {showAbout && createPortal(<AboutModal onClose={() => setShowAbout(false)} />, document.body)}
-      {showAuth  && <AuthModal  onClose={() => setShowAuth(false)} />}
-      {showUser  && <UserDrawer onClose={() => setShowUser(false)} />}
+      {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
+      {showUser && <UserDrawer onClose={() => setShowUser(false)} />}
     </>
   )
 }

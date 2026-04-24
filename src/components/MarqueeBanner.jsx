@@ -68,14 +68,14 @@ export default function MarqueeBanner() {
 
         .independent-row-top .marquee-track {
           position: absolute;
-          bottom: 45.5%; /* ← Твоя ідеальна позиція для верхнього */
+          bottom: 45.5%;
           left: 0;
           right: 0;
           display: inline-flex;
           white-space: nowrap;
           width: max-content;
           animation: marquee 60s linear infinite;
-          font-family: system-ui, sans-serif;
+          font-family: 'Arvo', Georgia, serif;
           font-size: 0.75rem;
           line-height: 1;
           letter-spacing: 0.2em;
@@ -100,7 +100,7 @@ export default function MarqueeBanner() {
           white-space: nowrap;
           width: max-content;
           animation: marquee-rtl 60s linear infinite;
-          font-family: system-ui, sans-serif;
+          font-family: 'Arvo', Georgia, serif;
           font-size: 0.75rem;
           line-height: 1;
           letter-spacing: 0.2em;

@@ -7,7 +7,7 @@
   body {
     background-color: #FAF7F2;
     color: #141412;
-    font-family: 'Outfit', system-ui, sans-serif;
+    font-family: 'Arvo', Georgia, serif;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -22,11 +22,9 @@
 }
 
 @layer utilities {
-  /* Тонка лінія-роздільник */
   .rule { height: 1px; background: #E8DDD1; }
   .rule-blush { height: 1px; background: #C4A882; }
 
-  /* Кнопка — чорна, інвертується */
   .btn-dark {
     background: #141412;
     color: #FAF7F2;
@@ -37,12 +35,12 @@
     transition: background 0.25s ease, color 0.25s ease;
     border: 1px solid #141412;
   }
+
   .btn-dark:hover {
     background: #FAF7F2;
     color: #141412;
   }
 
-  /* Кнопка — контурна */
   .btn-outline {
     background: transparent;
     color: #141412;
@@ -53,51 +51,55 @@
     border: 1px solid #2A2A27;
     transition: background 0.25s ease, color 0.25s ease;
   }
+
   .btn-outline:hover {
     background: #141412;
     color: #FAF7F2;
   }
 
-  /* Картка товару */
   .product-card-img {
     background: #F3EDE4;
     overflow: hidden;
     aspect-ratio: 3/4;
   }
+
   .product-card-img img {
-    width: 100%; height: 100%; object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
   }
+
   .product-card:hover .product-card-img img {
     transform: scale(1.04);
   }
 
-  /* Анімація появи */
   .fade-up {
     animation: fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) both;
   }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* Підкреслення-анімація для посилань */
   .link-underline {
     position: relative;
   }
+
   .link-underline::after {
     content: '';
     position: absolute;
     bottom: -1px; left: 0;
-    width: 0; height: 1px;
+    width: 0; heiцеht: 1px;
     background: #141412;
     transition: width 0.3s cubic-bezier(0.16,1,0.3,1);
   }
+
   .link-underline:hover::after { width: 100%; }
 
-  /* Номер-лейбл */
   .index-label {
-    font-family: 'DM Mono', monospace;
+    font-family: 'Arvo', Georgia, serif;
     font-size: 0.65rem;
     color: #C4A882;
     letter-spacing: 0.05em;

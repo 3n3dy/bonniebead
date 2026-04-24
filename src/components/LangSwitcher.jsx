@@ -28,7 +28,7 @@ export default function LangSwitcher({ mobile = false }) {
     <button
       key={lang}
       onClick={() => switchLang(lang)}
-      className={`px-2.5 py-1 text-xs tracking-widest uppercase font-sans transition-colors ${
+      className={`px-2.5 py-1 text-xs tracking-widest uppercase font-display transition-colors ${
         current === lang
           ? 'bg-stone-950 text-cream-100'
           : 'text-stone-500 hover:text-stone-950'

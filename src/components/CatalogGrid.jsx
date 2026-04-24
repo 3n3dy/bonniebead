@@ -8,7 +8,7 @@ export default function CatalogGrid({ categories, onSelect }) {
       <div className="flex items-center justify-between mb-10">
         <div className="flex items-center gap-4">
           <div className="rule-blush w-8" />
-          <p className="text-xs tracking-widest2 uppercase font-sans text-stone-500">{t('catalog.label')}</p>
+          <p className="text-xs tracking-widest2 uppercase font-display text-stone-500">{t('catalog.label')}</p>
         </div>
         <p className="index-label">{categories.length} {t('catalog.categories')}</p>
       </div>
@@ -33,17 +33,17 @@ function CategoryTile({ cat, index, onSelect }) {
     >
       <div className="flex items-start justify-between">
         <span className="index-label">{String(index + 1).padStart(2, '0')}</span>
-        <span className="font-sans text-xs text-stone-400 tracking-widest uppercase">
+        <span className="font-display text-xs text-stone-400 tracking-widest uppercase">
           {cat.products.length} {t('catalog.items')}
         </span>
       </div>
       <div>
-        <p className="font-sans text-xs tracking-widest2 uppercase text-blush mb-2">{cat.nameLatin}</p>
+        <p className="font-display text-xs tracking-widest2 uppercase text-blush mb-2">{cat.nameLatin}</p>
         <h3 className="font-display text-3xl md:text-4xl font-medium text-stone-950 group-hover:italic transition-all duration-300">
           {isEN && cat.nameEN ? cat.nameEN : cat.name}
         </h3>
         <div className="flex items-center justify-between mt-4">
-          <p className="font-sans text-xs text-stone-400">
+          <p className="font-display text-xs text-stone-400">
             {isEN && cat.noteEN ? cat.noteEN : cat.note}
           </p>
           <span className="w-7 h-7 border border-stone-300 group-hover:border-stone-950 group-hover:bg-stone-950 rounded-full flex items-center justify-center transition-all duration-300">

@@ -51,11 +51,11 @@ export default function CategoryPage({ category, onBack, onProductClick }) {
           </button>
           <div className="grid grid-cols-12 items-end gap-6">
             <div className="col-span-12 md:col-span-7">
-              <p className="font-sans text-xs tracking-widest2 uppercase text-blush mb-4">{category.nameLatin}</p>
+              <p className="font-display text-xs tracking-widest2 uppercase text-blush mb-4">{category.nameLatin}</p>
               <h2 className="font-display text-5xl md:text-7xl font-medium leading-tight">{name}</h2>
             </div>
             <div className="col-span-12 md:col-span-5 md:text-right">
-              <p className="font-sans text-sm text-cream-300 leading-relaxed">{note}</p>
+              <p className="font-display text-sm text-cream-300 leading-relaxed">{note}</p>
               <p className="index-label mt-3 text-stone-500">{category.products.length} {t('catalog.items')}</p>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function CategoryPage({ category, onBack, onProductClick }) {
         {/* Сортування */}
         {category.products.length > 1 && (
           <div className="flex items-center gap-3 mb-8">
-            <span className="text-xs tracking-widest uppercase text-stone-400 font-sans">
+            <span className="text-xs tracking-widest uppercase text-stone-400 font-display">
               {isEN ? 'Sort:' : 'Сортувати:'}
             </span>
             <div className="flex gap-1">
@@ -79,7 +79,7 @@ export default function CategoryPage({ category, onBack, onProductClick }) {
                 <button
                   key={opt.value}
                   onClick={() => setSort(opt.value)}
-                  className={`px-3 py-1.5 text-xs tracking-wide font-sans border transition-colors ${sort === opt.value
+                  className={`px-3 py-1.5 text-xs tracking-wide font-display border transition-colors ${sort === opt.value
                       ? 'bg-stone-950 text-cream-100 border-stone-950'
                       : 'border-cream-300 text-stone-500 hover:border-stone-400 hover:text-stone-800'
                     }`}
@@ -112,7 +112,7 @@ export default function CategoryPage({ category, onBack, onProductClick }) {
 
       <div className="rule" />
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 py-8 flex items-center justify-between">
-        <button onClick={onBack} className="link-underline text-xs tracking-widest2 uppercase font-sans text-stone-500 hover:text-stone-950 transition-colors">
+        <button onClick={onBack} className="link-underline text-xs tracking-widest2 uppercase font-display text-stone-500 hover:text-stone-950 transition-colors">
           ← {t('catalog.back')}
         </button>
         <p className="index-label">{name} / BONNIEBEAD</p>

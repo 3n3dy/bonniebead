@@ -19,14 +19,21 @@ export default function Hero() {
             >
               {t('hero.collection')}
             </a>
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-medium leading-[1.05] tracking-tight text-stone-950">
-              {t('hero.title_1')}<br />
-              <em className="font-normal italic">{t('hero.title_2')}</em><br />
-              {t('hero.title_3')}
+            <h1 className="font-display text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.05] tracking-tight text-stone-950">
+              <span className="font-normal">{t('hero.title_1')}</span><br />
+
+              <span className="sparkle-text font-normal italic inline-block">
+                {t('hero.title_2')}
+              </span>
+
+              <br />
+              <span className="font-normal">{t('hero.title_3')}</span>
             </h1>
+
+
           </div>
           <div className="col-span-12 md:col-span-4 md:text-right pb-2">
-            <p className="font-sans text-sm text-stone-500 leading-relaxed max-w-xs md:ml-auto">
+            <p className="font-serif text-sm text-stone-500 leading-relaxed max-w-xs md:ml-auto">
               {t('hero.description')}
             </p>
           </div>
@@ -35,11 +42,11 @@ export default function Hero() {
         <div className="rule mt-12 mb-8" />
         <div className="flex flex-wrap gap-8 md:gap-16">
           {[
-            ['400+',               t('hero.stat_orders')],
+            ['400+', t('hero.stat_orders')],
             ['AISI 316L/18К/24К', t('hero.stat_metal')],
           ].map(([val, label]) => (
             <div key={label}>
-              <p className="font-display text-xl font-medium text-stone-950">{val}</p>
+              <p className="font-arvo text-xl font-medium text-stone-950">{val}</p>
               <p className="index-label mt-0.5">{label}</p>
             </div>
           ))}

@@ -51,7 +51,7 @@ export default function ProductCard({ product, catName, onOpenProduct }) {
 
         {/* Бейдж наявності */}
         {avail && (
-          <div className={`absolute bottom-2 left-2 px-2 py-0.5 text-xs font-sans tracking-wide rounded-sm ${avail.bg} ${avail.text}`}>
+          <div className={`absolute bottom-2 left-2 px-2 py-0.5 text-xs font-display tracking-wide rounded-sm ${avail.bg} ${avail.text}`}>
             {isEN ? avail.labelEN : avail.label}
           </div>
         )}
@@ -80,18 +80,18 @@ export default function ProductCard({ product, catName, onOpenProduct }) {
       <div className="pt-4 pb-2">
         <div className="flex items-start justify-between gap-2">
           <div>
-            <h4 className="font-sans text-sm font-medium text-stone-950 leading-snug">{name}</h4>
+            <h4 className="font-display text-sm font-medium text-stone-950 leading-snug">{name}</h4>
             {product.material && <p className="index-label mt-1">{product.material}</p>}
           </div>
           {product.price && <p className="font-display text-base font-medium text-stone-950 whitespace-nowrap">{product.price}</p>}
         </div>
         {product.description && (
-          <p className="font-sans text-xs text-stone-400 leading-relaxed mt-2 line-clamp-2 whitespace-pre-wrap">
+          <p className="font-display text-xs text-stone-400 leading-relaxed mt-2 line-clamp-2 whitespace-pre-wrap">
             {isEN && product.descriptionEN ? product.descriptionEN : product.description}
           </p>
         )}
         <button onClick={handleAdd}
-          className={`mt-4 w-full py-2.5 text-xs tracking-widest uppercase font-medium transition-all duration-300 ${added ? 'bg-stone-950 text-cream-100 border border-stone-950' : 'btn-outline'}`}>
+          className={`mt-4 w-full py-2.5 text-xs tracking-widest uppercase font-display transition-all duration-300 ${added ? 'bg-stone-950 text-cream-100 border border-stone-950' : 'btn-outline'}`}>
           {added ? t('product.added') : t('product.add_to_cart')}
         </button>
       </div>

@@ -18,16 +18,17 @@ export default {
         blush: '#C4A882',
       },
       fontFamily: {
-        display: ['"Playfair Display"', 'Georgia', 'serif'],
-        sans:    ['"Outfit"', 'system-ui', 'sans-serif'],
-        mono:    ['"DM Mono"', 'monospace'],
+        display: ['Arvo', 'Georgia', 'serif'],
+        sans:    ['Arvo', 'Georgia', 'serif'],
+        mono:    ['Arvo', 'Georgia', 'serif'],
+        megrim:  ['Megrim', 'serif'],
       },
       letterSpacing: {
         widest2: '0.25em',
         widest3: '0.35em',
       },
       transitionTimingFunction: {
-        'expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        expo: 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
     },
   },
