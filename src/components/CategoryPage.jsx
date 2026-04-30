@@ -1,6 +1,8 @@
 import { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import ProductCard from './ProductCard'
+import { usePageMeta } from '../hooks/usePageMeta'
+import { HOSTNAME } from '../hooks/usePageMeta'
 
 function parsePrice(priceStr = '') {
   if (!priceStr) return Infinity // порожній → в кінець
@@ -16,6 +18,17 @@ export default function CategoryPage({ category, onBack, onProductClick }) {
 
   const name = isEN && category.nameEN ? category.nameEN : category.name
   const note = isEN && category.noteEN ? category.noteEN : category.note
+
+  const metaDescription = isEN
+    ? (category.noteEN || category.note || `Handmade ${name} by BONNIEBEAD. Unique beaded jewelry from Ukraine.`)
+    : (category.note || `${name} ручної роботи від BONNIEBEAD. Унікальні прикраси з бісеру та мінералів.`)
+
+  usePageMeta({
+    title: `${name} · BONNIEBEAD`,
+    description: metaDescription,
+    ogImage: `${HOSTNAME}/og-image.jpg`,
+    lang: isEN ? 'en' : 'uk',
+  })
 
   const sortedProducts = useMemo(() => {
     const products = [...category.products]
