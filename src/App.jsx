@@ -13,16 +13,8 @@ import CatalogGrid from './components/CatalogGrid'
 import CategoryPage from './components/CategoryPage'
 import ProductPage from './components/ProductPage'
 import Footer from './components/Footer'
-
-// ── Slug утиліта ─────────────────────────────────────────────────────────
-export function toSlug(str = '') {
-  return str
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w\u0400-\u04FF-]/g, '')
-    .replace(/--+/g, '-')
-    .trim()
-}
+import SeoHead from './seo/SeoHead'
+import { toSlug } from './seo/shared'
 
 // ── Layout ───────────────────────────────────────────────────────────────
 function Layout({ children }) {
@@ -148,6 +140,7 @@ function PublicSite() {
   return (
     <UserProvider>
       <CartProvider>
+        <SeoHead />
         <Routes>
           <Route path="/" element={<Layout><HomePage /></Layout>} />
           <Route path="/catalog/:categorySlug" element={<Layout><CategoryRoute /></Layout>} />

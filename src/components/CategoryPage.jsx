@@ -65,28 +65,32 @@ export default function CategoryPage({ category, onBack, onProductClick }) {
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 py-8">
         {/* Сортування */}
         {category.products.length > 1 && (
-          <div className="flex items-center gap-3 mb-8">
-            <span className="text-xs tracking-widest uppercase text-stone-400 font-display">
-              {isEN ? 'Sort:' : 'Сортувати:'}
-            </span>
-            <div className="flex gap-1">
-              {[
-                { value: 'default', label: isEN ? 'Default' : 'За замовч.' },
-                { value: 'az', label: isEN ? 'A → Z' : 'А → Я' },
-                { value: 'price_asc', label: isEN ? 'Price ↑' : 'Ціна ↑' },
-                { value: 'price_desc', label: isEN ? 'Price ↓' : 'Ціна ↓' },
-              ].map(opt => (
-                <button
-                  key={opt.value}
-                  onClick={() => setSort(opt.value)}
-                  className={`px-3 py-1.5 text-xs tracking-wide font-display border transition-colors ${sort === opt.value
-                      ? 'bg-stone-950 text-cream-100 border-stone-950'
-                      : 'border-cream-300 text-stone-500 hover:border-stone-400 hover:text-stone-800'
-                    }`}
-                >
-                  {opt.label}
-                </button>
-              ))}
+          <div className="sticky top-16 z-30 mb-8 -mx-6 border-y border-cream-300 bg-cream-100/95 px-6 py-3 backdrop-blur-sm md:-mx-12 md:px-12">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <span className="text-xs tracking-widest uppercase text-stone-400 font-display">
+                {isEN ? 'Sort:' : 'Сортувати:'}
+              </span>
+              <div className="-mx-1 overflow-x-auto px-1 pb-1">
+                <div className="flex min-w-max gap-1">
+                  {[
+                    { value: 'default', label: isEN ? 'Default' : 'За замовч.' },
+                    { value: 'az', label: isEN ? 'A → Z' : 'А → Я' },
+                    { value: 'price_asc', label: isEN ? 'Price ↑' : 'Ціна ↑' },
+                    { value: 'price_desc', label: isEN ? 'Price ↓' : 'Ціна ↓' },
+                  ].map(opt => (
+                    <button
+                      key={opt.value}
+                      onClick={() => setSort(opt.value)}
+                      className={`whitespace-nowrap px-3 py-1.5 text-xs tracking-wide font-display border transition-colors ${sort === opt.value
+                        ? 'bg-stone-950 text-cream-100 border-stone-950'
+                        : 'border-cream-300 text-stone-500 hover:border-stone-400 hover:text-stone-800'
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         )}
